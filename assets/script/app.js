@@ -15,45 +15,59 @@ function createAndWriteOutput(operator, resultBeforeCalc, calcNumber) {
 /*
     .... Multiline comment.
 */
+function writeToLog(   //reuse that function in evrey action 
+  operationIdentifier,
+  prevResult,
+  operationNumber,
+  newResult
+) {
+  const logEntry = {
+    operation: operationIdentifier,
+    prevResult: prevResult,
+    number: operationNumber,
+    result: newResult,
+  }; //object create
+  logEntries.push(logEntry);
+  console.log(logEntry.operation);
+  console.log(logEntries);
+}
+
 function add() {
   const enteredNumber = getUserNumberInput();
   const initialResult = currentResult;
   currentResult += enteredNumber;
   createAndWriteOutput("+", initialResult, enteredNumber);
-  const logEntry = {
-    operation: 'ADD',
-    prevResult: initialResult,
-    number: enteredNumber,
-    result: currentResult
-  }; //object create
-  logEntries.push(logEntry);
-  console.log(logEntries);
+  writeToLog('ADD', initialResult, enteredNumber, currentResult)
+  
 }
 function subtract() {
   const enteredNumber = getUserNumberInput();
   const initialResult = currentResult;
   currentResult -= enteredNumber;
   createAndWriteOutput("-", initialResult, enteredNumber);
+  writeToLog('SUBTRACT', initialResult, enteredNumber, currentResult)
+
 }
 
 function multiply() {
-    const enteredNumber = getUserNumberInput();
+  const enteredNumber = getUserNumberInput();
   const initialResult = currentResult;
-  currentResult *=  enteredNumber;
+  currentResult *= enteredNumber;
   createAndWriteOutput("*", initialResult, enteredNumber);
-  logEntries.push(enteredNumber);
-  console.log(logEntries);
+  writeToLog('MULTIPLY', initialResult, enteredNumber, currentResult)
+
 }
 
 function divide() {
-    const enteredNumber = getUserNumberInput();
+  const enteredNumber = getUserNumberInput();
   const initialResult = currentResult;
-  currentResult  /= enteredNumber;
+  currentResult /= enteredNumber;
   createAndWriteOutput("/", initialResult, enteredNumber);
+  writeToLog('DEVIDE', initialResult, enteredNumber, currentResult)
+
 }
 
 addBtn.addEventListener("click", add);
-subtractBtn.addEventListener("click", subtract);    
+subtractBtn.addEventListener("click", subtract);
 multiplyBtn.addEventListener("click", multiply);
 divideBtn.addEventListener("click", divide);
-
